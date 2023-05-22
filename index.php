@@ -6,32 +6,6 @@ Scriviamo tutto (logica e layout) in un unico file index.php
 Milestone 2
 Verificato il corretto funzionamento del nostro codice, spostiamo la logica in un file functions.php che includeremo poi nella pagina principale -->
 
-<?php
-   if( isset($_GET["password"]) ) {
-
-        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
-        $special ="!?@#";
-        $pass = "";
-        $count = 0;
-        for ($i = 0; $i < $_GET["password"]; $i++) {
-            if(random_int(0,1) && $count < 1){
-                $n = rand(0, strlen($special) - 1);
-                $pass .= $special[$n];
-                $count++;
-            }else{
-                $n = rand(0, strlen($alphabet) - 1);
-                $pass .= $alphabet[$n];
-            }
-
-            // $n = rand(0, strlen($alphabet) - 1);
-            // $pass .= $alphabet[$n];
-        }
-        echo "Your password is" . ' ' . $pass;
-        // return $pass;
-      
-        exit();
-    }
-?>
 
 
 <!DOCTYPE html>
@@ -44,10 +18,10 @@ Verificato il corretto funzionamento del nostro codice, spostiamo la logica in u
 </head>
 <body>
     
-    <form action = "<?php $_PHP_SELF ?>" method = "GET">
-        Di quanti caratteri vuoi la password?
-        <input type = "number" name = "password" />
-        <input type = "submit" pattern="[0-9]" placeholder="invia" />
+    <form action = "functions.php" method = "GET">
+        Di quanti caratteri vuoi la password? (Inserire solo numeri) <br>
+        <input type = "text" pattern="[0-9]*" name = "password" />
+        <input type = "submit" placeholder="invia" />
     </form>
 
 
