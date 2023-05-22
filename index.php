@@ -9,11 +9,22 @@ Verificato il corretto funzionamento del nostro codice, spostiamo la logica in u
 <?php
    if( isset($_GET["password"]) ) {
 
-        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789!?@#";
+        $alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+        $special ="!?@#";
         $pass = "";
+        $count = 0;
         for ($i = 0; $i < $_GET["password"]; $i++) {
-            $n = rand(0, strlen($alphabet) - 1);
-            $pass .= $alphabet[$n];
+            if(random_int(0,1) && $count < 1){
+                $n = rand(0, strlen($special) - 1);
+                $pass .= $special[$n];
+                $count++;
+            }else{
+                $n = rand(0, strlen($alphabet) - 1);
+                $pass .= $alphabet[$n];
+            }
+
+            // $n = rand(0, strlen($alphabet) - 1);
+            // $pass .= $alphabet[$n];
         }
         echo "Your password is" . ' ' . $pass;
         // return $pass;
